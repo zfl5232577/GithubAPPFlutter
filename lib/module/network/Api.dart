@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:github_flutter/base/constant.dart';
 
 import 'dart:collection';
@@ -6,6 +7,7 @@ import 'package:github_flutter/main.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:github_flutter/module/network/Code.dart';
 import 'package:github_flutter/module/network/ResultData.dart';
+import 'package:github_flutter/utils/log_utils.dart';
 
 ///http请求
 class HttpManager {
@@ -27,6 +29,8 @@ class HttpManager {
     //没有网络
     var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+          msg: "none network", toastLength: Toast.LENGTH_LONG);
       return new ResultData(
           Code.errorHandleFunction(Code.NETWORK_ERROR, "", noTip),
           false,
@@ -67,14 +71,18 @@ class HttpManager {
       if (e.response != null) {
         errorResponse = e.response;
       } else {
+        Fluttertoast.showToast(
+            msg: "network error", toastLength: Toast.LENGTH_LONG);
         errorResponse = new Response(statusCode: 666);
       }
       if (e.type == DioErrorType.CONNECT_TIMEOUT) {
+        Fluttertoast.showToast(
+            msg: "network timeout", toastLength: Toast.LENGTH_LONG);
         errorResponse.statusCode = Code.NETWORK_TIMEOUT;
       }
       if (Constant.debug) {
-        print('请求异常: ' + e.toString());
-        print('请求异常url: ' + url);
+        MLog.i('请求异常: ' + e.toString());
+        MLog.i('请求异常url: ' + url);
       }
       return new ResultData(
           Code.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
@@ -83,16 +91,16 @@ class HttpManager {
     }
 
     if (Constant.debug) {
-      print('请求url: ' + url);
-      print('请求头: ' + option.headers.toString());
+      MLog.i('请求url: ' + url);
+      MLog.i('请求头: ' + option.headers.toString());
       if (params != null) {
-        print('请求参数: ' + params.toString());
+        MLog.i('请求参数: ' + params.toString());
       }
       if (response != null) {
-        print('返回参数: ' + response.toString());
+        MLog.i('返回参数: ' + response.toString());
       }
       if (optionParams["authorizationCode"] != null) {
-        print('authorizationCode: ' + optionParams["authorizationCode"]);
+        MLog.i('authorizationCode: ' + optionParams["authorizationCode"]);
       }
     }
 
@@ -117,6 +125,8 @@ class HttpManager {
       return new ResultData(response.data, false, response.statusCode,
           headers: response.headers);
     }
+    Fluttertoast.showToast(
+        msg: "request abnormal", toastLength: Toast.LENGTH_LONG);
     return new ResultData(
         Code.errorHandleFunction(response.statusCode, "", noTip),
         false,

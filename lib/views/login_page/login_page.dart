@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:dio/dio.dart';
-import 'package:github_flutter/base/constant.dart';
 import 'dart:convert';
 
-import 'package:github_flutter/module/network/address.dart';
-import 'package:github_flutter/utils/common_utils.dart';
-import 'package:github_flutter/utils/log_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:github_flutter/base/constant.dart';
+import 'package:github_flutter/dao/userdao.dart';
 import 'package:github_flutter/main.dart';
-import 'package:github_flutter/utils/shared_preferences.dart';
+import 'package:github_flutter/utils/common_utils.dart';
+import 'package:github_flutter/views/navigator_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -97,12 +96,24 @@ class LoginState extends State<LoginPage> {
                           if ((_formKey.currentState as FormState).validate()) {
                             //验证通过提交数据
                             CommonUtils.showLoadingDialog(context);
-                            login(_unameController.text, _pwdController.text)
-                                .then((user) {
-                              Navigator.pop(context);
-                              MLog.i(user.toString());
-                              sp.putBool(SharedPreferencesKeys.isLogin, true);
-                              sp.putString(SharedPreferencesKeys.userInfo, json.encode(user));
+                            UserDao.getInstance().then((UserDao dao) {
+                              dao
+                                  .login(_unameController.text,
+                                      _pwdController.text)
+                                  .then((res) {
+                                Navigator.pop(context);
+                                if (res != null && res.result) {
+                                  NavigatorUtils.goHome(context);
+                                  sp.putBool(
+                                      SharedPreferencesKeys.isLogin, true);
+                                  sp.putString(SharedPreferencesKeys.userInfo,
+                                      json.encode(res.data));
+                                } else {
+                                  if(res.code == 401){
+                                    Fluttertoast.showToast(msg: "username or password error",toastLength:Toast.LENGTH_LONG);
+                                  }
+                                }
+                              });
                             });
                           }
                         },
@@ -116,17 +127,5 @@ class LoginState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  ///登陆
-  login(String username, String password) async {
-    String authorization =
-        "basic " + base64.encode(utf8.encode(username + ":" + password));
-    sp.putString(SharedPreferencesKeys.authorization, authorization);
-    Dio dio = new Dio();
-    Options options = new Options(method: "get");
-    options.headers["Authorization"] = authorization;
-    var response = await dio.request(Address.login, options: options);
-    return response.data;
   }
 }
