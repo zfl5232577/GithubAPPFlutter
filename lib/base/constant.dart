@@ -1,6 +1,6 @@
-
 class Constant {
-    static bool debug = true;
+  static const PAGE_SIZE = 20;
+  static const bool DEBUG = true;
 }
 
 class SharedPreferencesKeys {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MarkColos {
-  static const int ThemeColor = 0xFF4658B9;
+class MarkColors {
+  static const int ThemeColor = 0xFF3F51B5;
   static const int TextColor = 0xFF333333;
   static const int HintTextColor = 0xFFAAAAAA;
   static const String primaryValueString = "#24292E";
@@ -22,11 +22,26 @@ class MarkColos {
   static const int actionBlue = 0xff267aff;
   static const int subTextColor = 0xff959595;
   static const int subLightTextColor = 0xffc4c4c4;
+  static const int subGreenTextColor = 0xff008000;
 
   static const int mainBackgroundColor = miWhite;
 
   static const int mainTextColor = primaryDarkValue;
   static const int textColorWhite = white;
+
+  static const int transparent = 0x00000000;
+
+  static const int color_language_java = 0xffB07219;
+  static const int color_language_js = 0xffF1E05A;
+  static const int color_language_html = 0xffE34C26;
+  static const int color_language_css = 0xff563D7C;
+  static const int color_language_shell = 0xff89E051;
+  static const int color_language_python = 0xff3572A5;
+  static const int color_language_cplus = 0xffF34B7D;
+  static const int color_language_kotlin = 0xffF18E33;
+  static const int color_language_c = 0xff555555;
+  static const int color_language_ruby = 0x701516;
+  static const int color_language_other = 0x455a64;
 
   static const MaterialColor primarySwatch = const MaterialColor(
     primaryValue,

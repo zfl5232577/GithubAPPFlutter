@@ -48,9 +48,9 @@ class MainState extends State<MainPage> {
   }
 
   void _onItemTapped(int index) {
-    pageController.jumpToPage(index);
-//    pageController.animateToPage(index,
-//        duration: const Duration(milliseconds: 300), curve: Curves.ease);
+//    pageController.jumpToPage(index);
+    pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
   void pageChange(int index) {

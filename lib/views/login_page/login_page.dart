@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:github_flutter/base/constant.dart';
 import 'package:github_flutter/dao/userdao.dart';
+import 'package:github_flutter/data/user.dart';
 import 'package:github_flutter/main.dart';
+import 'package:github_flutter/routers/navigator_utils.dart';
 import 'package:github_flutter/utils/common_utils.dart';
-import 'package:github_flutter/views/navigator_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
@@ -103,11 +104,13 @@ class LoginState extends State<LoginPage> {
                                   .then((res) {
                                 Navigator.pop(context);
                                 if (res != null && res.result) {
+                                  User user = User.fromMap(res.data);
                                   NavigatorUtils.goHome(context);
                                   sp.putBool(
                                       SharedPreferencesKeys.isLogin, true);
                                   sp.putString(SharedPreferencesKeys.userInfo,
                                       json.encode(res.data));
+                                  userDao.setUserInfo(user);
                                 } else {
                                   if(res.code == 401){
                                     Fluttertoast.showToast(msg: "username or password error",toastLength:Toast.LENGTH_LONG);

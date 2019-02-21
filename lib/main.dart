@@ -30,17 +30,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return new MaterialApp(
-      title: 'title',
+      title: 'GitHubF',
       theme: new ThemeData(
-        primaryColor: Color(MarkColos.ThemeColor),
+        primaryColor: Color(MarkColors.ThemeColor),
         backgroundColor: Color(0xFFEFEFEF),
-        accentColor: Color(0xFF888888),
+        accentColor: Color(MarkColors.ThemeColor),
         textTheme: TextTheme(
           //设置Material的默认字体样式
-          body1: TextStyle(color: Color(MarkColos.TextColor), fontSize: 14.0),
+          body1: TextStyle(color: Color(MarkColors.TextColor), fontSize: 14.0),
         ),
         iconTheme: IconThemeData(
-          color: Color(MarkColos.ThemeColor),
+          color: Color(MarkColors.ThemeColor),
           size: 35.0,
         ),
       ),

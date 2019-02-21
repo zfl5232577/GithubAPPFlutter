@@ -80,7 +80,7 @@ class HttpManager {
             msg: "network timeout", toastLength: Toast.LENGTH_LONG);
         errorResponse.statusCode = Code.NETWORK_TIMEOUT;
       }
-      if (Constant.debug) {
+      if (Constant.DEBUG) {
         MLog.i('请求异常: ' + e.toString());
         MLog.i('请求异常url: ' + url);
       }
@@ -90,7 +90,7 @@ class HttpManager {
           errorResponse.statusCode);
     }
 
-    if (Constant.debug) {
+    if (Constant.DEBUG) {
       MLog.i('请求url: ' + url);
       MLog.i('请求头: ' + option.headers.toString());
       if (params != null) {
@@ -148,7 +148,7 @@ class HttpManager {
         //提示输入账号密码
       } else {
         //通过 basic 去获取token，获取到设置，返回token
-        return "Basic $basic";
+        return basic;
       }
     } else {
       optionParams["authorizationCode"] = token;

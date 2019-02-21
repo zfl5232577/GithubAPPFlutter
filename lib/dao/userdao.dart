@@ -39,7 +39,8 @@ class UserDao {
     String type = userName + ":" + password;
     var bytes = utf8.encode(type);
     var base64Str = base64.encode(bytes);
-    await sp.putString(SharedPreferencesKeys.authorization, base64Str);
+    var authorization = "basic "+ base64Str;
+    await sp.putString(SharedPreferencesKeys.authorization, authorization);
 
     Map requestParams = {
 //      "scopes": ['user', 'repo', 'gist', 'notifications'],
@@ -48,12 +49,23 @@ class UserDao {
 //      "client_secret": 'client_secret'
     };
     HttpManager.clearAuthorization();
-    return await HttpManager.netFetch(Address.login, json.encode(requestParams),
+    return await HttpManager.netFetch(Address.getLogin(), json.encode(requestParams),
         null, new Options(method: "get"));
   }
 
   bool checkLogin() {
     return isLogin != null && isLogin && userInfo != null;
+  }
+
+  String getUserName(){
+    return userInfo.login;
+  }
+
+  User get getUserInfo => userInfo;
+
+  void setUserInfo(userInfo) {
+    this.userInfo = userInfo;
+    isLogin = true;
   }
 
 //    ///读取主题

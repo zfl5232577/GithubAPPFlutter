@@ -1,7 +1,7 @@
 import 'package:github_flutter/base/constant.dart';
 
 class MLog {
-  static bool isDebug = Constant.debug;
+  static bool isDebug = Constant.DEBUG;
 
   static i(String log) {
     if(isDebug && log.isNotEmpty){
