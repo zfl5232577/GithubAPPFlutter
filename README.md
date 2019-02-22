@@ -18,13 +18,13 @@ samples, guidance on mobile development, and a full API reference.
 ## ScreenShots
 
 <div align:left;display:inline;>
-<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots1.jpg"/>
-<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots2.jpg"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GithubAPPFlutter/blob/master/screenshots/screenshots1.jpg"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GithubAPPFlutter/blob/master/screenshots/screenshots2.jpg"/>
 </div>
 
 <div align:left;display:inline;>
-<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots3.jpg"/>
-<img width="300" height="540" src="https://github.com/zfl5232577/GitHubJ/blob/master/screenshots/screenshots4.jpg"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GithubAPPFlutter/blob/master/screenshots/screenshots3.jpg"/>
+<img width="300" height="540" src="https://github.com/zfl5232577/GithubAPPFlutter/blob/master/screenshots/screenshots4.jpg"/>
 </div>
 
 ## Thanks to
